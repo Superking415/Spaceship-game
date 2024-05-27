@@ -99,7 +99,7 @@ function moveEnemies() {
         if (enemy.y > canvas.height) {
             enemies.splice(index, 1);
         }
-        if (enemy.lastShot === undefined || Date.now() - enemy.lastShot > shootingInterval) {
+        if (enemy.canShoot && (enemy.lastShot === undefined || Date.now() - enemy.lastShot > shootingInterval)) {
             enemy.lastShot = Date.now();
             enemyBullets.push({
                 x: enemy.x + enemy.width / 2 - 2,
@@ -116,9 +116,16 @@ function spawnEnemy() {
     const enemyWidth = 40;
     const enemyHeight = 40;
     const enemyType = Math.floor(Math.random() * 4);
-    const xPositions = [50, 150, 250, 350];
-    const x = xPositions[Math.floor(Math.random() * xPositions.length)];
-    enemies.push({ x, y: -enemyHeight, width: enemyWidth, height: enemyHeight, dy: 2, type: enemyType });
+    const x = Math.random() * (canvas.width - enemyWidth);
+    enemies.push({ 
+        x, 
+        y: -enemyHeight, 
+        width: enemyWidth, 
+        height: enemyHeight, 
+        dy: 2, 
+        type: enemyType,
+        canShoot: Math.random() < 0.7 // 50% kans dat een monster kan schieten
+    });
 }
 
 function loseLife() {
