@@ -7,16 +7,22 @@
     <link rel="stylesheet" href="retro.css">
 </head>
 <body>
+
     <div id="score">Score: 0</div>
+    
     <div id="lives-container">
         <div id="lives-label">Levens</div>
         <div id="lives"></div>
     </div>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <canvas id="gameCanvas" width="1600" height="1000"></canvas>
     <div id="game-over" style="display: none;">
         <h1>Game Over</h1>
         <p id="final-score"></p>
         <button id="restart-button">Opnieuw</button>
+        <form id="scoreForm" action="Pages/savescore.php" method="post">
+            <input type="hidden" id="scoreInput" name="score">
+            <button id="saveDataButton" type="submit">Score</button>
+        </form>
     </div>
     <script src="retro.js"></script>
 </body>
